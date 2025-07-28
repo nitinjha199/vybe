@@ -14,6 +14,9 @@ function getAllLoops() {
 const fetchloops=async ()=>{
     try {
         const result=await axios.get(`${serverUrl}/api/loop/getAll`,{withCredentials:true})
+        const sortedLoops = result.data.sort(
+          (a, b) => new Date(b.createdAt) - new Date(a.createdAt)
+        );
          dispatch(setLoopData(result.data))
     } catch (error) {
         console.log(error)
